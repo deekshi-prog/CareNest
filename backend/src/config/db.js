@@ -9,7 +9,11 @@ try {
 
 const connectDB = async () => {
   try {
-    const connURI = process.env.MONGODB_URI || 'mongodb+srv://flora_user:flora_password@cluster0.96o1pmf.mongodb.net/flora_assist?retryWrites=true&w=majority';
+    const defaultAtlasURI = 'mongodb+srv://flora_user:flora_password@cluster0.96o1pmf.mongodb.net/flora_assist?retryWrites=true&w=majority';
+    let connURI = process.env.MONGODB_URI;
+    if (!connURI || connURI.includes('127.0.0.1') || connURI.includes('localhost') || !connURI.includes('mongodb+srv://')) {
+      connURI = defaultAtlasURI;
+    }
     console.log(`Connecting to MongoDB at: ${connURI.replace(/\/\/[^:]+:[^@]+@/, '//***:***@')}`);
     const conn = await mongoose.connect(connURI, {
       serverSelectionTimeoutMS: 7500, // Timeout after 7.5s instead of hanging indefinitely
