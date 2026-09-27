@@ -16,8 +16,8 @@ const Review = require('../models/Review');
 
 const seedData = async () => {
   try {
-    const connURI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/flora_assist';
-    console.log(`Connecting to database for seeding: ${connURI}`);
+    const connURI = process.env.MONGODB_URI || 'mongodb+srv://flora_user:flora_password@cluster0.96o1pmf.mongodb.net/flora_assist?retryWrites=true&w=majority';
+    console.log(`Connecting to database for seeding: ${connURI.replace(/\/\/[^:]+:[^@]+@/, '//***:***@')}`);
     await mongoose.connect(connURI);
 
     // Delete existing records
@@ -30,7 +30,7 @@ const seedData = async () => {
 
     const passwordHash = await bcrypt.hash('password123', 10);
 
-    // 1. Create Users
+    // 1. Core Users (Admin & Clients)
     const usersToCreate = [
       {
         name: 'Admin Amit',
@@ -53,151 +53,366 @@ const seedData = async () => {
         role: 'client',
         avatar: '',
       },
-      // 10 Assistants with no human profile pictures (avatar = "")
+    ];
+
+    // Caretakers data across 6 Major Cities (Vijayawada, Hyderabad, Bangalore, Mumbai, Delhi, Chennai)
+    const assistantData = [
+      // --- VIJAYAWADA ---
       {
         name: "Aarav Sharma",
         email: "assistant1@flora.com",
-        password: passwordHash,
-        role: "assistant",
-        avatar: "",
+        city: "Vijayawada",
+        rating: 4.8,
+        reviewsCount: 14,
+        hourlyRate: 15,
+        bio: "B.Sc. Agriculture student specializing in soil health. Passionate about local botany, organic pest control, and maintaining structured garden schedules.",
+        coordinates: [80.5012, 16.4950],
+        address: "Sakhamaru Center, Vijayawada, Andhra Pradesh 522237"
       },
       {
         name: "Priya Nair",
         email: "assistant2@flora.com",
-        password: passwordHash,
-        role: "assistant",
-        avatar: "",
+        city: "Vijayawada",
+        rating: 4.9,
+        reviewsCount: 32,
+        hourlyRate: 22,
+        bio: "Professional estate manager with 4 years of experience tending to exotic tropical greenhouse plants, running residential irrigation systems, and handling basic domestic upkeep.",
+        coordinates: [80.5234, 16.5021],
+        address: "Near Amaravati Core, Vijayawada, Andhra Pradesh 522238"
       },
       {
         name: "Rohan Das",
         email: "assistant3@flora.com",
-        password: passwordHash,
-        role: "assistant",
-        avatar: "",
+        city: "Vijayawada",
+        rating: 4.3,
+        reviewsCount: 9,
+        hourlyRate: 18,
+        bio: "Lifelong animal lover and neighborhood community gardener. Highly reliable for regular home walkthroughs, pet food tracking, and seasonal landscape maintenance.",
+        coordinates: [80.5510, 16.4810],
+        address: "Thullur Region, Vijayawada, Andhra Pradesh 522239"
       },
       {
         name: "Ananya Reddy",
         email: "assistant4@flora.com",
-        password: passwordHash,
-        role: "assistant",
-        avatar: "",
+        city: "Vijayawada",
+        rating: 4.7,
+        reviewsCount: 21,
+        hourlyRate: 25,
+        bio: "Certified landscape designer offering deep botanical oversight. Specializes in drip irrigation setups, plant health assessments, and careful house sitting routines.",
+        coordinates: [80.5980, 16.5120],
+        address: "Tadepalle Border, Vijayawada, Andhra Pradesh 522501"
       },
       {
         name: "Vikram Malhotra",
         email: "assistant5@flora.com",
-        password: passwordHash,
-        role: "assistant",
-        avatar: "",
+        city: "Vijayawada",
+        rating: 4.5,
+        reviewsCount: 17,
+        hourlyRate: 20,
+        bio: "Reliable part-time farmhand and property caretaker. Experienced in handling broad lawn irrigation, basic sorting logs, and structured feeding plans for domestic pets.",
+        coordinates: [80.6224, 16.5062],
+        address: "Vijayawada Central, Andhra Pradesh 520001"
+      },
+
+      // --- HYDERABAD ---
+      {
+        name: "Karthik Varma",
+        email: "hyd_assistant1@flora.com",
+        city: "Hyderabad",
+        rating: 4.9,
+        reviewsCount: 38,
+        hourlyRate: 25,
+        bio: "Experienced urban gardener in Hitech City. Specialist in balcony vertical gardens, automated drip systems, and daily pet care.",
+        coordinates: [78.3800, 17.4435], // Hitech City
+        address: "Hitech City, Hyderabad, Telangana 500081"
       },
       {
-        name: "Kavitha Krishnan",
-        email: "assistant6@flora.com",
-        password: passwordHash,
-        role: "assistant",
-        avatar: "",
+        name: "Sravani Rao",
+        email: "hyd_assistant2@flora.com",
+        city: "Hyderabad",
+        rating: 4.8,
+        reviewsCount: 27,
+        hourlyRate: 22,
+        bio: "Passionate home sitter and plant enthusiast in Jubilee Hills. Reliable with mail collection, pet feeding, and indoor bonsai care.",
+        coordinates: [78.4088, 17.4319], // Jubilee Hills
+        address: "Jubilee Hills, Hyderabad, Telangana 500033"
       },
       {
-        name: "Siddharth Rao",
-        email: "assistant7@flora.com",
-        password: passwordHash,
-        role: "assistant",
-        avatar: "",
+        name: "Mahesh Babu K",
+        email: "hyd_assistant3@flora.com",
+        city: "Hyderabad",
+        rating: 4.7,
+        reviewsCount: 19,
+        hourlyRate: 20,
+        bio: "Gachibowli based caretaker. Expert in terrace garden watering, dog walking, and routine property safety checks.",
+        coordinates: [78.3489, 17.4401], // Gachibowli
+        address: "Gachibowli, Hyderabad, Telangana 500032"
       },
       {
-        name: "Meera Joshi",
-        email: "assistant8@flora.com",
-        password: passwordHash,
-        role: "assistant",
-        avatar: "",
+        name: "Divya Nambiar",
+        email: "hyd_assistant4@flora.com",
+        city: "Hyderabad",
+        rating: 5.0,
+        reviewsCount: 44,
+        hourlyRate: 30,
+        bio: "Senior estate minder in Banjara Hills. Specialized in exotic flora care, cat sitting, and high-security home walkthroughs.",
+        coordinates: [78.4482, 17.4156], // Banjara Hills
+        address: "Banjara Hills, Hyderabad, Telangana 500034"
       },
       {
-        name: "Rahul Verma",
-        email: "assistant9@flora.com",
-        password: passwordHash,
-        role: "assistant",
-        avatar: "",
+        name: "Praneeth Teja",
+        email: "hyd_assistant5@flora.com",
+        city: "Hyderabad",
+        rating: 4.6,
+        reviewsCount: 16,
+        hourlyRate: 18,
+        bio: "Kondapur neighborhood assistant. Prompt with daily checklists, mail sorting, lawn maintenance, and pet feeding.",
+        coordinates: [78.3600, 17.4600], // Kondapur
+        address: "Kondapur, Hyderabad, Telangana 500084"
+      },
+
+      // --- BANGALORE ---
+      {
+        name: "Arjun Gowda",
+        email: "blr_assistant1@flora.com",
+        city: "Bangalore",
+        rating: 4.9,
+        reviewsCount: 41,
+        hourlyRate: 28,
+        bio: "Koramangala green thumb & pet lover. 4+ years keeping urban terrace gardens blooming and pets happy while owners travel.",
+        coordinates: [77.6245, 12.9352], // Koramangala
+        address: "Koramangala 4th Block, Bangalore, Karnataka 560034"
       },
       {
-        name: "Divya Teja",
-        email: "assistant10@flora.com",
-        password: passwordHash,
-        role: "assistant",
-        avatar: "",
+        name: "Meera Hegde",
+        email: "blr_assistant2@flora.com",
+        city: "Bangalore",
+        rating: 4.8,
+        reviewsCount: 30,
+        hourlyRate: 26,
+        bio: "Indiranagar house minder. Expert in orchid care, succulent hydration schedules, and active dog walking.",
+        coordinates: [77.6412, 12.9784], // Indiranagar
+        address: "Indiranagar 100ft Road, Bangalore, Karnataka 560038"
       },
       {
-        name: "Rohan Sen",
-        email: "assistant11@flora.com",
-        password: passwordHash,
-        role: "assistant",
-        avatar: "",
+        name: "Nikhil Menon",
+        email: "blr_assistant3@flora.com",
+        city: "Bangalore",
+        rating: 4.7,
+        reviewsCount: 23,
+        hourlyRate: 22,
+        bio: "HSR Layout property assistant. Experienced with hydroponics, indoor foliage, mail collection, and cat care.",
+        coordinates: [77.6387, 12.9121], // HSR Layout
+        address: "HSR Layout Sector 1, Bangalore, Karnataka 560102"
       },
       {
-        name: "Sneha Kapoor",
-        email: "assistant12@flora.com",
-        password: passwordHash,
-        role: "assistant",
-        avatar: "",
+        name: "Pooja Kulkarni",
+        email: "blr_assistant4@flora.com",
+        city: "Bangalore",
+        rating: 5.0,
+        reviewsCount: 50,
+        hourlyRate: 35,
+        bio: "Whitefield villa caretaker. Specialized in large lawn upkeep, pet medication administration, and daily photo reports.",
+        coordinates: [77.7499, 12.9698], // Whitefield
+        address: "Whitefield Main Road, Bangalore, Karnataka 560066"
       },
       {
-        name: "Tarun Verma",
-        email: "assistant13@flora.com",
-        password: passwordHash,
-        role: "assistant",
-        avatar: "",
+        name: "Varun Reddy",
+        email: "blr_assistant5@flora.com",
+        city: "Bangalore",
+        rating: 4.6,
+        reviewsCount: 18,
+        hourlyRate: 20,
+        bio: "Jayanagar student caretaker. Thorough with daily task lists, indoor plant mister routines, and mail pickup.",
+        coordinates: [77.5824, 12.9250], // Jayanagar
+        address: "Jayanagar 4th Block, Bangalore, Karnataka 560011"
+      },
+
+      // --- MUMBAI ---
+      {
+        name: "Aditya Shah",
+        email: "mum_assistant1@flora.com",
+        city: "Mumbai",
+        rating: 4.9,
+        reviewsCount: 36,
+        hourlyRate: 32,
+        bio: "Bandra West residential helper. Trusted for high-rise balcony plant care, security checks, and pet sitting.",
+        coordinates: [72.8295, 19.0596], // Bandra
+        address: "Bandra West, Mumbai, Maharashtra 400050"
       },
       {
-        name: "Shalini Gupta",
-        email: "assistant14@flora.com",
-        password: passwordHash,
-        role: "assistant",
-        avatar: "",
+        name: "Rhea Kapoor",
+        email: "mum_assistant2@flora.com",
+        city: "Mumbai",
+        rating: 4.8,
+        reviewsCount: 29,
+        hourlyRate: 28,
+        bio: "Juhu coastal property assistant. Specialized in salt-air resistant plant care, dog walking, and mail sorting.",
+        coordinates: [72.8267, 19.1075], // Juhu
+        address: "Juhu Scheme, Mumbai, Maharashtra 400049"
       },
       {
-        name: "Harish Kumar",
-        email: "assistant15@flora.com",
-        password: passwordHash,
-        role: "assistant",
-        avatar: "",
+        name: "Siddharth Kulkarni",
+        email: "mum_assistant3@flora.com",
+        city: "Mumbai",
+        rating: 4.7,
+        reviewsCount: 20,
+        hourlyRate: 25,
+        bio: "Powai lake area caretaker. Reliable terrace gardener, cat feeder, and general home walkthrough manager.",
+        coordinates: [72.9051, 19.1176], // Powai
+        address: "Hiranandani Gardens Powai, Mumbai, Maharashtra 400076"
       },
       {
-        name: "Nisha Patil",
-        email: "assistant16@flora.com",
-        password: passwordHash,
-        role: "assistant",
-        avatar: "",
+        name: "Tanvi Mehta",
+        email: "mum_assistant4@flora.com",
+        city: "Mumbai",
+        rating: 5.0,
+        reviewsCount: 48,
+        hourlyRate: 38,
+        bio: "Colaba heritage home sitter. Experienced in vintage garden maintenance, mail logging, and pet care.",
+        coordinates: [72.8311, 18.9067], // Colaba
+        address: "Colaba Causeway, Mumbai, Maharashtra 400005"
       },
       {
-        name: "Ajay Dev",
-        email: "assistant17@flora.com",
-        password: passwordHash,
-        role: "assistant",
-        avatar: "",
+        name: "Karan Fernandes",
+        email: "mum_assistant5@flora.com",
+        city: "Mumbai",
+        rating: 4.6,
+        reviewsCount: 15,
+        hourlyRate: 22,
+        bio: "Andheri West property helper. Quick, punctual, and reliable with daily plant watering and pet check-ins.",
+        coordinates: [72.8333, 19.1197], // Andheri
+        address: "Lokhandwala Andheri West, Mumbai, Maharashtra 400053"
+      },
+
+      // --- DELHI ---
+      {
+        name: "Kabir Chaudhry",
+        email: "del_assistant1@flora.com",
+        city: "Delhi",
+        rating: 4.9,
+        reviewsCount: 39,
+        hourlyRate: 30,
+        bio: "South Ext botanist & property minder. Expert in seasonal flower beds, air-purifying indoor foliage, and dog care.",
+        coordinates: [77.2197, 28.5708], // South Ext
+        address: "South Extension Part 2, New Delhi 110049"
       },
       {
-        name: "Manisha Shaw",
-        email: "assistant18@flora.com",
-        password: passwordHash,
-        role: "assistant",
-        avatar: "",
+        name: "Simran Kaur",
+        email: "del_assistant2@flora.com",
+        city: "Delhi",
+        rating: 4.8,
+        reviewsCount: 31,
+        hourlyRate: 27,
+        bio: "Hauz Khas Enclave caretaker. Dedicated to courtyard plant hydration, pet exercise, and mail collection.",
+        coordinates: [77.2066, 28.5494], // Hauz Khas
+        address: "Hauz Khas Village, New Delhi 110016"
       },
       {
-        name: "Suresh Naidu",
-        email: "assistant19@flora.com",
-        password: passwordHash,
-        role: "assistant",
-        avatar: "",
+        name: "Gaurav Sharma",
+        email: "del_assistant3@flora.com",
+        city: "Delhi",
+        rating: 4.7,
+        reviewsCount: 22,
+        hourlyRate: 24,
+        bio: "Connaught Place house sitter. Reliable with central Delhi home checks, pot weeding, and cat feeding.",
+        coordinates: [77.2167, 28.6315], // Connaught Place
+        address: "Connaught Place Block C, New Delhi 110001"
       },
       {
-        name: "Lakshmi Bai",
-        email: "assistant20@flora.com",
-        password: passwordHash,
-        role: "assistant",
-        avatar: "",
+        name: "Anushka Malik",
+        email: "del_assistant4@flora.com",
+        city: "Delhi",
+        rating: 5.0,
+        reviewsCount: 45,
+        hourlyRate: 36,
+        bio: "Vasant Vihar homestead assistant. Professional plant health inspector, pet care expert, and property supervisor.",
+        coordinates: [77.1610, 28.5562], // Vasant Vihar
+        address: "Vasant Vihar, New Delhi 110057"
+      },
+      {
+        name: "Rishabh Verma",
+        email: "del_assistant5@flora.com",
+        city: "Delhi",
+        rating: 4.6,
+        reviewsCount: 17,
+        hourlyRate: 21,
+        bio: "Dwarka Sector 10 assistant. Prompt with daily checklists, lawn watering, mail logging, and pet visits.",
+        coordinates: [77.0500, 28.5800], // Dwarka
+        address: "Dwarka Sector 10, New Delhi 110075"
+      },
+
+      // --- CHENNAI ---
+      {
+        name: "Karthikeyan S",
+        email: "chn_assistant1@flora.com",
+        city: "Chennai",
+        rating: 4.9,
+        reviewsCount: 40,
+        hourlyRate: 26,
+        bio: "T. Nagar garden caretaker. Specialist in tropical flowering plants, coconut palm care, and dog walking.",
+        coordinates: [80.2337, 13.0418], // T. Nagar
+        address: "T. Nagar, Chennai, Tamil Nadu 600017"
+      },
+      {
+        name: "Lakshmi Sundaram",
+        email: "chn_assistant2@flora.com",
+        city: "Chennai",
+        rating: 4.8,
+        reviewsCount: 28,
+        hourlyRate: 24,
+        bio: "Adyar coastal plant specialist. Experienced in balcony pot hydration, cat sitting, and daily mail retrieval.",
+        coordinates: [80.2565, 13.0012], // Adyar
+        address: "Adyar Depot Area, Chennai, Tamil Nadu 600020"
+      },
+      {
+        name: "Vijay Anand",
+        email: "chn_assistant3@flora.com",
+        city: "Chennai",
+        rating: 4.7,
+        reviewsCount: 21,
+        hourlyRate: 22,
+        bio: "Velachery neighborhood helper. Prompt with terrace garden watering, home security checks, and pet care.",
+        coordinates: [80.2170, 12.9815], // Velachery
+        address: "Velachery Main Road, Chennai, Tamil Nadu 600042"
+      },
+      {
+        name: "Ramya Iyer",
+        email: "chn_assistant4@flora.com",
+        city: "Chennai",
+        rating: 5.0,
+        reviewsCount: 47,
+        hourlyRate: 32,
+        bio: "Anna Nagar villa supervisor. Expert in bonsai maintenance, pet feeding routines, and comprehensive visit logs.",
+        coordinates: [80.2090, 13.0850], // Anna Nagar
+        address: "Anna Nagar West, Chennai, Tamil Nadu 600040"
+      },
+      {
+        name: "Santhosh Kumar",
+        email: "chn_assistant5@flora.com",
+        city: "Chennai",
+        rating: 4.6,
+        reviewsCount: 16,
+        hourlyRate: 19,
+        bio: "Mylapore traditional garden minder. Thorough with daily watering schedules, mail sorting, and pet visits.",
+        coordinates: [80.2676, 13.0339], // Mylapore
+        address: "Mylapore Temple Area, Chennai, Tamil Nadu 600004"
       }
     ];
 
+    // Create User accounts for all Caretakers
+    for (const ast of assistantData) {
+      usersToCreate.push({
+        name: ast.name,
+        email: ast.email,
+        password: passwordHash,
+        role: "assistant",
+        avatar: "",
+      });
+    }
+
     const users = await User.insertMany(usersToCreate);
-    console.log(`${users.length} Users created.`);
+    console.log(`${users.length} Users created across 6 cities.`);
 
     // 2. Create Profiles
     const profilesToCreate = [];
@@ -222,195 +437,12 @@ const seedData = async () => {
       bio: 'Terrace garden lover looking for daily watering assistance.',
     });
 
-    // 10 Assistant Profiles
-    const assistantData = [
-      {
-        email: "assistant1@flora.com",
-        rating: 4.8,
-        reviewsCount: 14,
-        hourlyRate: 15,
-        bio: "B.Sc. Agriculture student specializing in soil health. Passionate about local botany, organic pest control, and maintaining structured garden schedules.",
-        coordinates: [80.5012, 16.4950],
-        address: "Sakhamaru Center, Vijayawada, Andhra Pradesh 522237"
-      },
-      {
-        email: "assistant2@flora.com",
-        rating: 4.9,
-        reviewsCount: 32,
-        hourlyRate: 22,
-        bio: "Professional estate manager with 4 years of experience tending to exotic tropical greenhouse plants, running residential irrigation systems, and handling basic domestic upkeep.",
-        coordinates: [80.5234, 16.5021],
-        address: "Near Amaravati Core, Vijayawada, Andhra Pradesh 522238"
-      },
-      {
-        email: "assistant3@flora.com",
-        rating: 4.3,
-        reviewsCount: 9,
-        hourlyRate: 18,
-        bio: "Lifelong animal lover and neighborhood community gardener. Highly reliable for regular home walkthroughs, pet food tracking, and seasonal landscape maintenance.",
-        coordinates: [80.5510, 16.4810],
-        address: "Thullur Region, Vijayawada, Andhra Pradesh 522239"
-      },
-      {
-        email: "assistant4@flora.com",
-        rating: 4.7,
-        reviewsCount: 21,
-        hourlyRate: 25,
-        bio: "Certified landscape designer offering deep botanical oversight. Specializes in drip irrigation setups, plant health assessments, and careful house sitting routines.",
-        coordinates: [80.5980, 16.5120],
-        address: "Tadepalle Border, Vijayawada, Andhra Pradesh 522501"
-      },
-      {
-        email: "assistant5@flora.com",
-        rating: 4.5,
-        reviewsCount: 17,
-        hourlyRate: 20,
-        bio: "Reliable part-time farmhand and property caretaker. Experienced in handling broad lawn irrigation, basic sorting logs, and structured feeding plans for domestic pets.",
-        coordinates: [80.6224, 16.5062],
-        address: "Vijayawada Central, Andhra Pradesh 520001"
-      },
-      {
-        email: "assistant6@flora.com",
-        rating: 4.9,
-        reviewsCount: 45,
-        hourlyRate: 28,
-        bio: "Top-rated homestead assistant with extensive experience managing complex property checklists, nursery care, and strict pet medication schedules during owner vacations.",
-        coordinates: [80.6410, 16.5350],
-        address: "Gunadala Area, Vijayawada, Andhra Pradesh 520004"
-      },
-      {
-        email: "assistant7@flora.com",
-        rating: 4.1,
-        reviewsCount: 6,
-        hourlyRate: 16,
-        bio: "Attentive environmental science graduate focused on eco-friendly urban farming layouts. Prompt with daily checklists, mail sorting, and ensuring clean home conditions.",
-        coordinates: [80.4520, 16.4410],
-        address: "Mangalagiri Town, Guntur/Vijayawada, Andhra Pradesh 522503"
-      },
-      {
-        email: "assistant8@flora.com",
-        rating: 4.6,
-        reviewsCount: 11,
-        hourlyRate: 21,
-        bio: "Experienced pet sitter and florist assistant. Adept at recognizing plant nutrient deficiencies, organizing porch gardens, and tracking precise companion pet dietary routines.",
-        coordinates: [80.6680, 16.4720],
-        address: "Patamata Region, Vijayawada, Andhra Pradesh 520010"
-      },
-      {
-        email: "assistant9@flora.com",
-        rating: 4.4,
-        reviewsCount: 19,
-        hourlyRate: 19,
-        bio: "Methodical property minder and plant nursery worker. Dedicated to daily property line checks, precise garden weeding/watering cycles, and attentive pet company visits.",
-        coordinates: [80.4120, 16.4150],
-        address: "Guntur Outskirts, Andhra Pradesh 522002"
-      },
-      {
-        email: "assistant10@flora.com",
-        rating: 4.8,
-        reviewsCount: 28,
-        hourlyRate: 30,
-        bio: "Premium residential caretaker offering elite horticultural care. Expert in tracking high-maintenance indoor foliage collections, managing mail drop-offs, and custom pet diets.",
-        coordinates: [80.6850, 16.3210],
-        address: "Outer Limit Boundary, Vijayawada Rural, Andhra Pradesh 520015"
-      },
-      {
-        email: "assistant11@flora.com",
-        rating: 4.6,
-        reviewsCount: 15,
-        hourlyRate: 20,
-        bio: "Energetic college student with 2 years of house sitting and lawn mowing experience. Prompt with task lists.",
-        coordinates: [80.6250, 16.5150],
-        address: "Labbipet, Vijayawada, Andhra Pradesh 520010"
-      },
-      {
-        email: "assistant12@flora.com",
-        rating: 4.8,
-        reviewsCount: 22,
-        hourlyRate: 24,
-        bio: "Attentive pet lover and plant care specialist. Experienced with indoor vertical gardens and feeding schedules.",
-        coordinates: [80.6080, 16.4950],
-        address: "Governorpet, Vijayawada, Andhra Pradesh 520002"
-      },
-      {
-        email: "assistant13@flora.com",
-        rating: 4.2,
-        reviewsCount: 8,
-        hourlyRate: 18,
-        bio: "Local gardener offering plant watering, leaf clearing, and pet feeding services. Always reliable.",
-        coordinates: [80.6550, 16.5220],
-        address: "Moghalrajpuram, Vijayawada, Andhra Pradesh 520010"
-      },
-      {
-        email: "assistant14@flora.com",
-        rating: 4.9,
-        reviewsCount: 37,
-        hourlyRate: 26,
-        bio: "Horticulture enthusiast specialized in watering sensitive plants, orchid care, and dog walking.",
-        coordinates: [80.6720, 16.5450],
-        address: "Ramavarappadu, Vijayawada, Andhra Pradesh 520008"
-      },
-      {
-        email: "assistant15@flora.com",
-        rating: 4.0,
-        reviewsCount: 5,
-        hourlyRate: 16,
-        bio: "Friendly neighborhood caretaker ready to help with watering garden pots, mail retrieval, and general safety checks.",
-        coordinates: [80.6120, 16.5320],
-        address: "Satyanarayanapuram, Vijayawada, Andhra Pradesh 520011"
-      },
-      {
-        email: "assistant16@flora.com",
-        rating: 4.7,
-        reviewsCount: 19,
-        hourlyRate: 21,
-        bio: "Dedicated house sitter and domestic caretaker. Skilled in organic plant feeding and handling senior dogs.",
-        coordinates: [80.5750, 16.5010],
-        address: "Vidyadharapuram, Vijayawada, Andhra Pradesh 520012"
-      },
-      {
-        email: "assistant17@flora.com",
-        rating: 4.5,
-        reviewsCount: 13,
-        hourlyRate: 19,
-        bio: "Prompt and responsible assistant with references. Offers mail retrieval, garden care, and check-ins.",
-        coordinates: [80.6420, 16.4850],
-        address: "Krishnalanka, Vijayawada, Andhra Pradesh 520013"
-      },
-      {
-        email: "assistant18@flora.com",
-        rating: 5.0,
-        reviewsCount: 52,
-        hourlyRate: 32,
-        bio: "Elite house manager with 5+ years of experience. Expert in complex indoor plant care, mail sorting, and pet care.",
-        coordinates: [80.6950, 16.5120],
-        address: "Enikepadu, Vijayawada, Andhra Pradesh 521108"
-      },
-      {
-        email: "assistant19@flora.com",
-        rating: 4.4,
-        reviewsCount: 11,
-        hourlyRate: 17,
-        bio: "Reliable helper focused on terrace garden maintenance, custom pet feeding plans, and regular home walkthroughs.",
-        coordinates: [80.5910, 16.4620],
-        address: "Kanakadurga Varadhi Area, Vijayawada, Andhra Pradesh 522501"
-      },
-      {
-        email: "assistant20@flora.com",
-        rating: 4.7,
-        reviewsCount: 26,
-        hourlyRate: 23,
-        bio: "Professional caretaker offering exceptional botanical maintenance, lawn upkeep, and domestic checkup services.",
-        coordinates: [80.7250, 16.5050],
-        address: "Prasadampadu, Vijayawada, Andhra Pradesh 521108"
-      }
-    ];
-
+    // Create Profiles for all Assistants
     assistantData.forEach((ast, idx) => {
       const u = users.find(usr => usr.email === ast.email);
       profilesToCreate.push({
         userId: u._id,
-        phone: `+91 98481 000${idx + 1}`,
+        phone: `+91 98481 000${(idx + 1).toString().padStart(2, '0')}`,
         address: ast.address,
         location: { type: 'Point', coordinates: ast.coordinates },
         bio: ast.bio,
@@ -428,7 +460,7 @@ const seedData = async () => {
     });
 
     const profiles = await Profile.insertMany(profilesToCreate);
-    console.log(`${profiles.length} Profiles created.`);
+    console.log(`${profiles.length} Profiles created across Vijayawada, Hyderabad, Bangalore, Mumbai, Delhi, and Chennai.`);
 
     // 3. Create simulated Bookings and Reviews
     const astAarav = users.find(u => u.email === 'assistant1@flora.com');
@@ -459,7 +491,7 @@ const seedData = async () => {
       clientId: clientSai._id,
       assistantId: astAarav._id,
       rating: 5,
-      comment: 'Very professional student helper. Tended to plants carefully.',
+      comment: 'Very professional helper. Tended to plants carefully.',
     });
 
     const booking2 = await Booking.create({
@@ -491,7 +523,7 @@ const seedData = async () => {
     });
 
     console.log('Sample bookings and reviews seeded successfully.');
-    console.log('Successfully seeded 10 highly realistic multi-service caretakers across varying radiuses!');
+    console.log('Successfully seeded 30+ caretakers across Vijayawada, Hyderabad, Bangalore, Mumbai, Delhi, and Chennai!');
     mongoose.connection.close();
   } catch (error) {
     console.error('Error seeding database:', error);
