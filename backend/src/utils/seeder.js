@@ -60,7 +60,7 @@ const seedData = async () => {
       // --- VIJAYAWADA ---
       {
         name: "Aarav Sharma",
-        email: "assistant1@flora.com",
+        email: "aaravsharma@gmail.com",
         city: "Vijayawada",
         rating: 4.8,
         reviewsCount: 14,
@@ -71,7 +71,7 @@ const seedData = async () => {
       },
       {
         name: "Priya Nair",
-        email: "assistant2@flora.com",
+        email: "priyanair@gmail.com",
         city: "Vijayawada",
         rating: 4.9,
         reviewsCount: 32,
@@ -82,7 +82,7 @@ const seedData = async () => {
       },
       {
         name: "Rohan Das",
-        email: "assistant3@flora.com",
+        email: "rohandas@gmail.com",
         city: "Vijayawada",
         rating: 4.3,
         reviewsCount: 9,
@@ -93,7 +93,7 @@ const seedData = async () => {
       },
       {
         name: "Ananya Reddy",
-        email: "assistant4@flora.com",
+        email: "ananyareddy@gmail.com",
         city: "Vijayawada",
         rating: 4.7,
         reviewsCount: 21,
@@ -104,7 +104,7 @@ const seedData = async () => {
       },
       {
         name: "Vikram Malhotra",
-        email: "assistant5@flora.com",
+        email: "vikrammalhotra@gmail.com",
         city: "Vijayawada",
         rating: 4.5,
         reviewsCount: 17,
@@ -117,7 +117,7 @@ const seedData = async () => {
       // --- HYDERABAD ---
       {
         name: "Karthik Varma",
-        email: "hyd_assistant1@flora.com",
+        email: "karthikvarma@gmail.com",
         city: "Hyderabad",
         rating: 4.9,
         reviewsCount: 38,
@@ -128,7 +128,7 @@ const seedData = async () => {
       },
       {
         name: "Sravani Rao",
-        email: "hyd_assistant2@flora.com",
+        email: "sravanirao@gmail.com",
         city: "Hyderabad",
         rating: 4.8,
         reviewsCount: 27,
@@ -139,7 +139,7 @@ const seedData = async () => {
       },
       {
         name: "Mahesh Babu K",
-        email: "hyd_assistant3@flora.com",
+        email: "maheshbabu@gmail.com",
         city: "Hyderabad",
         rating: 4.7,
         reviewsCount: 19,
@@ -150,7 +150,7 @@ const seedData = async () => {
       },
       {
         name: "Divya Nambiar",
-        email: "hyd_assistant4@flora.com",
+        email: "divyanambiar@gmail.com",
         city: "Hyderabad",
         rating: 5.0,
         reviewsCount: 44,
@@ -161,7 +161,7 @@ const seedData = async () => {
       },
       {
         name: "Praneeth Teja",
-        email: "hyd_assistant5@flora.com",
+        email: "praneethteja@gmail.com",
         city: "Hyderabad",
         rating: 4.6,
         reviewsCount: 16,
@@ -174,7 +174,7 @@ const seedData = async () => {
       // --- BANGALORE ---
       {
         name: "Arjun Gowda",
-        email: "blr_assistant1@flora.com",
+        email: "arjungowda@gmail.com",
         city: "Bangalore",
         rating: 4.9,
         reviewsCount: 41,
@@ -185,7 +185,7 @@ const seedData = async () => {
       },
       {
         name: "Meera Hegde",
-        email: "blr_assistant2@flora.com",
+        email: "meerahegde@gmail.com",
         city: "Bangalore",
         rating: 4.8,
         reviewsCount: 30,
@@ -196,7 +196,7 @@ const seedData = async () => {
       },
       {
         name: "Nikhil Menon",
-        email: "blr_assistant3@flora.com",
+        email: "nikhilmenon@gmail.com",
         city: "Bangalore",
         rating: 4.7,
         reviewsCount: 23,
@@ -207,7 +207,7 @@ const seedData = async () => {
       },
       {
         name: "Pooja Kulkarni",
-        email: "blr_assistant4@flora.com",
+        email: "poojakulkarni@gmail.com",
         city: "Bangalore",
         rating: 5.0,
         reviewsCount: 50,
@@ -218,7 +218,7 @@ const seedData = async () => {
       },
       {
         name: "Varun Reddy",
-        email: "blr_assistant5@flora.com",
+        email: "varunreddy@gmail.com",
         city: "Bangalore",
         rating: 4.6,
         reviewsCount: 18,
@@ -231,7 +231,7 @@ const seedData = async () => {
       // --- MUMBAI ---
       {
         name: "Aditya Shah",
-        email: "mum_assistant1@flora.com",
+        email: "adityashah@gmail.com",
         city: "Mumbai",
         rating: 4.9,
         reviewsCount: 36,
@@ -242,7 +242,7 @@ const seedData = async () => {
       },
       {
         name: "Rhea Kapoor",
-        email: "mum_assistant2@flora.com",
+        email: "rheakapoor@gmail.com",
         city: "Mumbai",
         rating: 4.8,
         reviewsCount: 29,
@@ -253,7 +253,7 @@ const seedData = async () => {
       },
       {
         name: "Siddharth Kulkarni",
-        email: "mum_assistant3@flora.com",
+        email: "siddharthkulkarni@gmail.com",
         city: "Mumbai",
         rating: 4.7,
         reviewsCount: 20,
@@ -264,7 +264,7 @@ const seedData = async () => {
       },
       {
         name: "Tanvi Mehta",
-        email: "mum_assistant4@flora.com",
+        email: "tanvimehta@gmail.com",
         city: "Mumbai",
         rating: 5.0,
         reviewsCount: 48,
@@ -275,7 +275,7 @@ const seedData = async () => {
       },
       {
         name: "Karan Fernandes",
-        email: "mum_assistant5@flora.com",
+        email: "karanfernandes@gmail.com",
         city: "Mumbai",
         rating: 4.6,
         reviewsCount: 15,
@@ -288,7 +288,7 @@ const seedData = async () => {
       // --- DELHI ---
       {
         name: "Kabir Chaudhry",
-        email: "del_assistant1@flora.com",
+        email: "kabirchaudhry@gmail.com",
         city: "Delhi",
         rating: 4.9,
         reviewsCount: 39,
@@ -299,7 +299,7 @@ const seedData = async () => {
       },
       {
         name: "Simran Kaur",
-        email: "del_assistant2@flora.com",
+        email: "simrankaur@gmail.com",
         city: "Delhi",
         rating: 4.8,
         reviewsCount: 31,
@@ -310,7 +310,7 @@ const seedData = async () => {
       },
       {
         name: "Gaurav Sharma",
-        email: "del_assistant3@flora.com",
+        email: "gauravsharma@gmail.com",
         city: "Delhi",
         rating: 4.7,
         reviewsCount: 22,
@@ -321,7 +321,7 @@ const seedData = async () => {
       },
       {
         name: "Anushka Malik",
-        email: "del_assistant4@flora.com",
+        email: "anushkamalik@gmail.com",
         city: "Delhi",
         rating: 5.0,
         reviewsCount: 45,
@@ -332,7 +332,7 @@ const seedData = async () => {
       },
       {
         name: "Rishabh Verma",
-        email: "del_assistant5@flora.com",
+        email: "rishabhverma@gmail.com",
         city: "Delhi",
         rating: 4.6,
         reviewsCount: 17,
@@ -345,7 +345,7 @@ const seedData = async () => {
       // --- CHENNAI ---
       {
         name: "Karthikeyan S",
-        email: "chn_assistant1@flora.com",
+        email: "karthikeyans@gmail.com",
         city: "Chennai",
         rating: 4.9,
         reviewsCount: 40,
@@ -356,7 +356,7 @@ const seedData = async () => {
       },
       {
         name: "Lakshmi Sundaram",
-        email: "chn_assistant2@flora.com",
+        email: "lakshmisundaram@gmail.com",
         city: "Chennai",
         rating: 4.8,
         reviewsCount: 28,
@@ -367,7 +367,7 @@ const seedData = async () => {
       },
       {
         name: "Vijay Anand",
-        email: "chn_assistant3@flora.com",
+        email: "vijayanand@gmail.com",
         city: "Chennai",
         rating: 4.7,
         reviewsCount: 21,
@@ -378,7 +378,7 @@ const seedData = async () => {
       },
       {
         name: "Ramya Iyer",
-        email: "chn_assistant4@flora.com",
+        email: "ramyaiyer@gmail.com",
         city: "Chennai",
         rating: 5.0,
         reviewsCount: 47,
@@ -389,7 +389,7 @@ const seedData = async () => {
       },
       {
         name: "Santhosh Kumar",
-        email: "chn_assistant5@flora.com",
+        email: "santhoshkumar@gmail.com",
         city: "Chennai",
         rating: 4.6,
         reviewsCount: 16,
@@ -463,8 +463,8 @@ const seedData = async () => {
     console.log(`${profiles.length} Profiles created across Vijayawada, Hyderabad, Bangalore, Mumbai, Delhi, and Chennai.`);
 
     // 3. Create simulated Bookings and Reviews
-    const astAarav = users.find(u => u.email === 'assistant1@flora.com');
-    const astPriya = users.find(u => u.email === 'assistant2@flora.com');
+    const astAarav = users.find(u => u.email === 'aaravsharma@gmail.com');
+    const astPriya = users.find(u => u.email === 'priyanair@gmail.com');
 
     const booking1 = await Booking.create({
       clientId: clientSai._id,
@@ -523,7 +523,7 @@ const seedData = async () => {
     });
 
     console.log('Sample bookings and reviews seeded successfully.');
-    console.log('Successfully seeded 30+ caretakers across Vijayawada, Hyderabad, Bangalore, Mumbai, Delhi, and Chennai!');
+    console.log('Successfully seeded 30+ caretakers with @gmail.com email addresses across 6 major cities!');
     mongoose.connection.close();
   } catch (error) {
     console.error('Error seeding database:', error);
