@@ -223,8 +223,11 @@ export default function Explore() {
             onChange={(e) => setMaxDistance(Number(e.target.value))}
             style={{ height: '45px' }}
           >
+            <option value={2}>2 km</option>
+            <option value={5}>5 km</option>
+            <option value={10}>10 km</option>
+            <option value={15}>15 km</option>
             <option value={30}>30+ km</option>
-            <option value={50}>50+ km</option>
           </select>
         </div>
 
@@ -333,10 +336,10 @@ export default function Explore() {
               <button
                 type="button"
                 className="btn btn-primary"
-                onClick={() => setMaxDistance(50)}
+                onClick={() => setMaxDistance(30)}
                 style={{ marginTop: '8px', padding: '10px 24px', fontSize: '0.88rem' }}
               >
-                Expand Radius to 50km
+                Expand Radius to 30+ km
               </button>
             </div>
           ) : (
