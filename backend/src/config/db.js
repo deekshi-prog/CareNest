@@ -11,13 +11,14 @@ if (process.platform === 'win32') {
 
 const connectDB = async () => {
   try {
-    const connURI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/flora_assist';
-    console.log(`Connecting to MongoDB at: ${connURI}`);
-    const conn = await mongoose.connect(connURI);
+    const connURI = process.env.MONGODB_URI || 'mongodb+srv://flora_user:flora_password@cluster0.96o1pmf.mongodb.net/flora_assist?retryWrites=true&w=majority';
+    console.log(`Connecting to MongoDB at: ${connURI.replace(/\/\/[^:]+:[^@]+@/, '//***:***@')}`);
+    const conn = await mongoose.connect(connURI, {
+      serverSelectionTimeoutMS: 7500, // Timeout after 7.5s instead of hanging indefinitely
+    });
     console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
     console.error(`Error connecting to MongoDB: ${error.message}`);
-    process.exit(1);
   }
 };
 
