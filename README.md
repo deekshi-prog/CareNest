@@ -4,7 +4,6 @@
 
 [![Live Demo](https://img.shields.io/badge/Live--Demo-Vercel-000000?style=for-the-badge&logo=vercel)](https://care-nest-psi.vercel.app)
 [![Backend API](https://img.shields.io/badge/Backend--API-Render-46E3B7?style=for-the-badge&logo=render)](https://carenest-backend-4828.onrender.com/health)
-[![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
 
 ---
 
@@ -146,4 +145,3 @@ Open **[http://localhost:5173](http://localhost:5173)** in your browser!
 ## 👩‍💻 Author & Acknowledgements
 
 * **Developed by**: Deekshitha Kotha ([@deekshi-prog](https://github.com/deekshi-prog))
-* **License**: Open Source under the [MIT License](LICENSE)
