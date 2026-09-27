@@ -40,14 +40,14 @@ export default function Explore() {
   const [latitude, setLatitude] = useState(16.4920);
   const [longitude, setLongitude] = useState(80.4982);
   const [selectedCityName, setSelectedCityName] = useState('Vijayawada / Guntur');
-  const [maxDistance, setMaxDistance] = useState(15);
+  const [maxDistance, setMaxDistance] = useState(30);
   const [minRating, setMinRating] = useState('');
   const [selectedService, setSelectedService] = useState('');
 
   // Active Query States (triggers backend search or client filter)
   const [activeLatitude, setActiveLatitude] = useState(16.4920);
   const [activeLongitude, setActiveLongitude] = useState(80.4982);
-  const [activeRadius, setActiveRadius] = useState(15);
+  const [activeRadius, setActiveRadius] = useState(30);
   const [activeMinRating, setActiveMinRating] = useState('');
   const [activeService, setActiveService] = useState('');
 
@@ -223,12 +223,8 @@ export default function Explore() {
             onChange={(e) => setMaxDistance(Number(e.target.value))}
             style={{ height: '45px' }}
           >
-            <option value={2}>2 km</option>
-            <option value={5}>5 km</option>
-            <option value={10}>10 km</option>
-            <option value={15}>15 km</option>
-            <option value={30}>30 km</option>
-            <option value={50}>50 km</option>
+            <option value={30}>30+ km</option>
+            <option value={50}>50+ km</option>
           </select>
         </div>
 
