@@ -28,8 +28,19 @@ export default function Navbar() {
 
   return (
     <nav className="navbar">
-      <Link to="/" className="nav-logo">
-        🏡 CareNest
+      <Link to="/" className="nav-logo" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '1.4rem', fontWeight: '800', color: '#1E5631', textDecoration: 'none' }}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 100 100" style={{ flexShrink: 0 }}>
+          <g fill="#1E5631">
+            <circle cx="32" cy="56" r="16" />
+            <circle cx="22" cy="64" r="12" />
+            <circle cx="38" cy="66" r="11" />
+            <rect x="62" y="24" width="8" height="18" rx="1" />
+            <path d="M 58 18 L 92 48 L 84 48 L 58 25 L 32 48 L 24 48 Z" />
+            <rect x="36" y="46" width="48" height="38" rx="2" />
+            <rect x="16" y="82" width="68" height="6" rx="3" />
+          </g>
+        </svg>
+        CareNest
       </Link>
 
       <div className="nav-links">
