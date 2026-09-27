@@ -52,18 +52,17 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
-const server = app.listen(PORT, () => {
+const server = app.listen(PORT, '0.0.0.0', async () => {
   console.log(`Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
   
   // Connect to MongoDB after server binds to port
-  connectDB();
-
-  // Start decoupled background worker queue
   try {
+    await connectDB();
+    // Start background queue worker only after DB connection is established
     const { startQueueWorker } = require('./utils/jobQueue');
     startQueueWorker();
   } catch (err) {
-    console.warn('Background worker startup note:', err.message);
+    console.error('Database connection or worker error:', err.message);
   }
 });
 
