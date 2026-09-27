@@ -206,7 +206,7 @@ export default function Home() {
                   </svg>
                 ),
                 bullets: [
-                  <>Asynchronous email alerts via background queue</>,
+                  <>Asynchronous booking alerts via background queue</>,
                   <>Real-time booking confirmations & alerts</>,
                   <>Instant complete visit status updates</>
                 ]
